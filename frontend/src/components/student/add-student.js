@@ -5,12 +5,11 @@ import {
   CardContent,
   Button,
   TextField,
-  IconButton,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { createStudent, uploadProfile } from "../../actions/studentAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 
 const Input = styled("input")({
   display: "none",
@@ -26,26 +25,19 @@ const AddStudent = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const student = { name, email, phone };
+    e.preventDefault();
+    const student = { name, email, phone };
+    const originalPromiseResult = await dispatch(
+      createStudent(student)
+    ).unwrap();
 
-      const originalPromiseResult = await dispatch(
-        createStudent(student)
-      ).unwrap();
+    const formData = new FormData();
+    formData.append("profile", profile);
 
-      const formData = new FormData();
-      formData.append("profile", profile);
-      await dispatch(
-        uploadProfile({
-          id: originalPromiseResult.data._id,
-          profile: formData,
-        })
-      ).unwrap();
-      navigate("/");
-    } catch (rejectedValueOrSerializedError) {
-      console.log(rejectedValueOrSerializedError);
-    }
+    await dispatch(
+      uploadProfile({ id: originalPromiseResult.data._id, profile: formData })
+    );
+    navigate("/");
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -81,6 +73,7 @@ const AddStudent = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+
           <label htmlFor="contained-button-file">
             <Input
               accept="image/*"

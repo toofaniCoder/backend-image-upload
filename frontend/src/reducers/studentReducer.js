@@ -17,7 +17,7 @@ const studentReducer = createReducer(initialState, (builder) => {
     .addCase(getStudents.fulfilled, (state, action) => {
       state.students = action.payload.data;
     })
-    .addCase(createStudent, (state, action) => {
+    .addCase(createStudent.fulfilled, (state, action) => {
       state.students = [action.payload, ...state.students];
     })
     .addCase(getStudent.fulfilled, (state, action) => {

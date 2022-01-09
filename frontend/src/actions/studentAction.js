@@ -44,16 +44,7 @@ export const removeStudent = createAsyncThunk(
 export const uploadProfile = createAsyncThunk(
   "students/uploadProfile",
   async ({ id, profile }) => {
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    const { data } = await axios.post(
-      `/students/${id}/profile`,
-      profile,
-      config
-    );
+    const { data } = await axios.post(`/students/${id}/profile`, profile);
     return data;
   }
 );

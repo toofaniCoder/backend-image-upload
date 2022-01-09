@@ -15,7 +15,7 @@ function App() {
         <GlobalStyles styles={globalStyles} />
 
         <Routes>
-          <Route path="/" element={<Students />} />
+          <Route path="/" index element={<Students />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/:id/edit" element={<EditStudent />} />
         </Routes>
