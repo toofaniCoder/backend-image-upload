@@ -40,3 +40,20 @@ export const removeStudent = createAsyncThunk(
     return studentId;
   }
 );
+
+export const uploadProfile = createAsyncThunk(
+  "students/uploadProfile",
+  async ({ id, profile }) => {
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    const { data } = await axios.post(
+      `/students/${id}/profile`,
+      profile,
+      config
+    );
+    return data;
+  }
+);

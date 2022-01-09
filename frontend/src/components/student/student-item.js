@@ -40,7 +40,7 @@ const buttonGroupStyle = {
 };
 
 const StudentItem = ({ student }) => {
-  const { _id, name, email } = student;
+  const { _id, name, email, profile } = student;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -53,7 +53,7 @@ const StudentItem = ({ student }) => {
         }}
       >
         <Stack spacing={1.5}>
-          <img src="/user.jpg" alt="user" style={{ borderTopLeftRadius: 15 }} />
+          <img src={profile} alt="user" style={{ borderTopLeftRadius: 15 }} />
           <div>
             <UserName>{name}</UserName>
             <UserEmail>{email}</UserEmail>

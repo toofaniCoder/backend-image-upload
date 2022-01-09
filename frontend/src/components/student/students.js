@@ -15,6 +15,7 @@ const Students = () => {
   useEffect(() => {
     dispatch(getStudents());
   }, []);
+  // if (students.length == 0) return <h1>loading...</h1>;
   return (
     <Container sx={{ py: 2 }}>
       <Fab
